@@ -37,5 +37,10 @@ namespace ChipSplit
 		{
 			//listbox_processes.
 		}
+
+		private void Button_Click(object sender, RoutedEventArgs e)
+		{
+			flyoutRight.IsOpen = true;
+		}
 	}
 }

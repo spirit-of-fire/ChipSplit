@@ -12,24 +12,69 @@
 		ShowMaxRestoreButton="False"
 		ShowInTaskbar="true" ResizeMode="CanMinimize"
 		ShowIconOnTitleBar="True" ShowCloseButton="True"
-		Background="AliceBlue">
+		Background="white"
+		GlowBrush="{DynamicResource AccentColorBrush}">
 
+    <Controls:MetroWindow.Flyouts>
+        <Controls:FlyoutsControl Name="flyoutsControl1">
+            <Controls:Flyout x:Name="flyoutRight" Header="Flyout" Position="Right" Width="200">
+                <TextBlock x:Name="textBlockFlyOut" TextWrapping="Wrap" Text="DISPLAY" Height="22" FontSize="14.667"/>
+            </Controls:Flyout>
+        </Controls:FlyoutsControl>
+    </Controls:MetroWindow.Flyouts>
 
 
     <Grid>
-        <Rectangle Fill="LightBlue" HorizontalAlignment="Left" Height="571" VerticalAlignment="Top" Width="275"/>
         <Button x:Name="buttonStart" Content="Start" Margin="700,536,0,0" Click="buttonStart_Click" x:FieldModifier="public" Height="20" VerticalAlignment="Top" HorizontalAlignment="Left" Width="84" Style="{DynamicResource SquareButtonStyle}"/>
-        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="62,9,0,0">
-            <ComboBoxItem Content="(16:9) 1024x576"/>
-            <ComboBoxItem Content="(16:9) 1152x648"/>
-            <ComboBoxItem Content="(16:9) 1280x720"/>
-            <ComboBoxItem Content="(16:9) 1366x768"/>
-            <ComboBoxItem Content="(16:9) 1600x900"/>
-            <ComboBoxItem Content="(16:9) 1920x1080"/>
-            <ComboBoxItem Content="(16:9) 2560x1440"/>
-            <ComboBoxItem Content="(16:9) 3840x2160"/>
+        <ComboBox x:Name="comboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="120" Margin="324,192,0,0">
+            <ComboBoxItem Content="Top Left"/>
+            <ComboBoxItem Content="Top Right"/>
+            <ComboBoxItem Content="Bottom Left"/>
+            <ComboBoxItem Content="Bottom Right"/>
+            <ComboBoxItem Content="Top Center"/>
+            <ComboBoxItem Content="Bottom Center"/>
+            <ComboBoxItem Content="Left Center"/>
+            <ComboBoxItem Content="Right Center"/>
+            <ComboBoxItem Content="Middle"/>
         </ComboBox>
-        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Display" VerticalAlignment="Top" Height="22" FontSize="14.667"/>
+		
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="DISPLAY" VerticalAlignment="Top" Height="22" FontSize="14.667"/>
+        <TextBox x:Name="textBox_Copy5" Controls:TextBoxHelper.Watermark="X"  HorizontalAlignment="Left" Height="23" Margin="69,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="48"/>
+        <TextBox x:Name="textBox_Copy6" Controls:TextBoxHelper.Watermark="Y" HorizontalAlignment="Left" Height="23" Margin="122,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="48"/>
+		<TextBlock x:Name="textBlock_Copy3" HorizontalAlignment="Left" Margin="10,46,0,0" TextWrapping="Wrap" Text="Processes" VerticalAlignment="Top" Height="22" FontSize="14.667"/>
+        <Button x:Name="button_shift_up_process" Width="30" Height="30" Style="{DynamicResource MetroCircleButtonStyle}" Margin="150,38,614,503">
+            <Rectangle Width="12" Height="12"
+        		Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                <Rectangle.OpacityMask>
+                    <VisualBrush Stretch="Uniform" Visual="{DynamicResource appbar_arrow_up}" />
+                </Rectangle.OpacityMask>
+            </Rectangle>
+        </Button>
+        <Button x:Name="button_shift_down_process" Width="30" Height="30" Style="{DynamicResource MetroCircleButtonStyle}" Margin="180,38,584,503">
+            <Rectangle Width="12" Height="12"
+        		Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                <Rectangle.OpacityMask>
+                    <VisualBrush Stretch="Uniform" Visual="{DynamicResource appbar_arrow_down}" />
+                </Rectangle.OpacityMask>
+            </Rectangle>
+        </Button>
+        <Button x:Name="button_add_process" Width="30" Height="30" Style="{DynamicResource MetroCircleButtonStyle}" Margin="210,38,554,503">
+            <Rectangle Width="12" Height="12"
+        		Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                <Rectangle.OpacityMask>
+                    <VisualBrush Stretch="Uniform" Visual="{DynamicResource appbar_add}" />
+                </Rectangle.OpacityMask>
+            </Rectangle>
+        </Button>
+        <Button x:Name="button_remove_process" Width="30" Height="30" Style="{DynamicResource MetroCircleButtonStyle}" Margin="240,38,524,503">
+            <Rectangle Width="12" Height="12"
+        		Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                <Rectangle.OpacityMask>
+                    <VisualBrush Stretch="Uniform" Visual="{DynamicResource appbar_minus}" />
+                </Rectangle.OpacityMask>
+            </Rectangle>
+        </Button>
+
         <ListBox x:Name="listbox_processes" HorizontalAlignment="Left" Height="100" Margin="10,68,0,0" VerticalAlignment="Top" Width="260" IsSynchronizedWithCurrentItem="True">
             <ListBoxItem Content="first" />
             <ListBoxItem Content="first1" />
@@ -46,19 +91,11 @@
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
             </Grid.Resources>
-            <TextBlock x:Name="textBlock_Copy2" HorizontalAlignment="Left" Margin="10,174,0,0" TextWrapping="Wrap" Text="Position" VerticalAlignment="Top" Height="22" FontSize="14.667" Width="84" RenderTransformOrigin="0.604,0.75" TextAlignment="Center"/>
-            <Button x:Name="button" Content="╔" HorizontalAlignment="Left" VerticalAlignment="Top" Width="28" Height="28" Margin="10,196,0,0"/>
-            <Button x:Name="button_Copy" Content="═" HorizontalAlignment="Left" VerticalAlignment="Top" Width="28" Margin="38,196,0,0" Height="28" RenderTransformOrigin="0.214,4.083"/>
-            <Button x:Name="button_Copy1" Content="╗" HorizontalAlignment="Left" VerticalAlignment="Top" Width="28" Margin="66,196,0,0" Height="28"/>
-            <Button x:Name="button_Copy2" Content="║" HorizontalAlignment="Left" VerticalAlignment="Top" Width="28" Margin="10,224,0,0" Height="28"/>
-            <Button x:Name="button_Copy3" Content="■" HorizontalAlignment="Left" VerticalAlignment="Top" Width="28" Margin="38,224,0,0" Height="28"/>
-            <Button x:Name="button_Copy4" Content="║" HorizontalAlignment="Left" VerticalAlignment="Top" Width="28" Margin="66,224,0,0" Height="28"/>
-            <Button x:Name="button_Copy5" Content="╚" HorizontalAlignment="Left" VerticalAlignment="Top" Width="28" Margin="10,252,0,0" Height="28"/>
-            <Button x:Name="button_Copy6" Content="═" HorizontalAlignment="Left" VerticalAlignment="Top" Width="28" Margin="38,252,0,0" Height="28"/>
-            <Button x:Name="button_Copy7" Content="╝" HorizontalAlignment="Left" VerticalAlignment="Top" Width="28" Margin="66,252,0,0" Height="28"/>
+
+
         </Grid>
 
-        <Button Width="50" Height="50" Style="{DynamicResource MetroCircleButtonStyle}" Margin="694,0,50,521">
+        <Button Width="50" Height="50" Style="{DynamicResource MetroCircleButtonStyle}" Margin="734,287,10,234">
             <Rectangle Width="20" Height="20"
 						Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
                 <Rectangle.OpacityMask>
@@ -67,32 +104,20 @@
             </Rectangle>
         </Button>
 
-        <Button Width="50" Height="50" Style="{DynamicResource MetroCircleButtonStyle}" Margin="744,0,0,521">
-            <Rectangle Width="20" Height="20"
+        <Button Width="40" Height="40" Style="{DynamicResource MetroCircleButtonStyle}" Margin="744,10,10,521" Click="Button_Click">
+            <Rectangle Width="18" Height="18"
 						Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
                 <Rectangle.OpacityMask>
-                    <VisualBrush Stretch="Uniform" Visual="{DynamicResource appbar_minus}" />
+                    <VisualBrush Stretch="Uniform" Visual="{DynamicResource appbar_arrow_left}" />
                 </Rectangle.OpacityMask>
             </Rectangle>
         </Button>
 
-        <ToggleButton Width="50" Height="50" Style="{DynamicResource MetroCircleToggleButtonStyle}" Margin="734,232,10,289">
-            <Rectangle Width="20" Height="20"
-						Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ToggleButton}}}">
-                <Rectangle.OpacityMask>
-                    <VisualBrush Stretch="Uniform" Visual="{DynamicResource appbar_connect}" />
-                </Rectangle.OpacityMask>
-            </Rectangle>
-        </ToggleButton>
+        
 
         <Button x:Name="button0" Content="default" HorizontalAlignment="Left" Margin="710,55,0,0" VerticalAlignment="Top" Width="74"/>
         <Button x:Name="button1" Content="square" Style="{DynamicResource SquareButtonStyle}" HorizontalAlignment="Left" Margin="710,85,0,0" VerticalAlignment="Top" Width="74"/>
         <Button x:Name="button2" Content="accentedsquare" Style="{StaticResource AccentedSquareButtonStyle}" HorizontalAlignment="Left" Margin="710,115,0,0" VerticalAlignment="Top" Width="74"/>
-
-
-        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="324,37,0,0" TextWrapping="Wrap" Text="path" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="textBox_Copy" HorizontalAlignment="Left" Height="23" Margin="324,68,0,0" TextWrapping="Wrap" Text="args" VerticalAlignment="Top" Width="120"/>
-
         <StackPanel Margin="710,148,10,394">
             <StackPanel.Resources>
                 <ResourceDictionary>
@@ -111,47 +136,36 @@
                 </Rectangle.OpacityMask>
             </Rectangle>
         </Button>
-        <TextBlock x:Name="textBlock_Copy3" HorizontalAlignment="Left" Margin="10,46,0,0" TextWrapping="Wrap" Text="Processes" VerticalAlignment="Top" Height="22" FontSize="14.667"/>
+
+        <ToggleButton Width="50" Height="50" Style="{DynamicResource MetroCircleToggleButtonStyle}" Margin="734,232,10,289">
+            <Rectangle Width="20" Height="20"
+						Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ToggleButton}}}">
+                <Rectangle.OpacityMask>
+                    <VisualBrush Stretch="Uniform" Visual="{DynamicResource appbar_connect}" />
+                </Rectangle.OpacityMask>
+            </Rectangle>
+        </ToggleButton>
+		
+        
+        
+        
+
+        
+        
+        <TextBlock x:Name="textBlock_Copy" HorizontalAlignment="Left" Margin="280,6,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Height="26" FontSize="14.667"/>
         <TextBlock x:Name="textBlock_Copy4" HorizontalAlignment="Left" Margin="291,37,0,0" TextWrapping="Wrap" Text="Path" VerticalAlignment="Top" Height="26" FontSize="14.667"/>
         <TextBlock x:Name="textBlock_Copy1" HorizontalAlignment="Left" Margin="290,68,0,0" TextWrapping="Wrap" Text="Args" VerticalAlignment="Top" Height="26" FontSize="14.667"/>
-        <Button x:Name="button_add_process" Width="30" Height="30" Style="{DynamicResource MetroCircleButtonStyle}" Margin="210,38,554,503">
-            <Rectangle Width="12" Height="12"
-        		Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
-                <Rectangle.OpacityMask>
-                    <VisualBrush Stretch="Uniform" Visual="{DynamicResource appbar_add}" />
-                </Rectangle.OpacityMask>
-            </Rectangle>
-        </Button>
-        <Button x:Name="button_remove_process" Width="30" Height="30" Style="{DynamicResource MetroCircleButtonStyle}" Margin="240,38,524,503">
-            <Rectangle Width="12" Height="12"
-        		Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
-                <Rectangle.OpacityMask>
-                    <VisualBrush Stretch="Uniform" Visual="{DynamicResource appbar_minus}" />
-                </Rectangle.OpacityMask>
-            </Rectangle>
-        </Button>
-        <Button x:Name="button_shift_up_process" Width="30" Height="30" Style="{DynamicResource MetroCircleButtonStyle}" Margin="150,38,614,503">
-            <Rectangle Width="12" Height="12"
-        		Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
-                <Rectangle.OpacityMask>
-                    <VisualBrush Stretch="Uniform" Visual="{DynamicResource appbar_arrow_up}" />
-                </Rectangle.OpacityMask>
-            </Rectangle>
-        </Button>
-        <Button x:Name="button_shift_down_process" Width="30" Height="30" Style="{DynamicResource MetroCircleButtonStyle}" Margin="180,38,584,503">
-            <Rectangle Width="12" Height="12"
-        		Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
-                <Rectangle.OpacityMask>
-                    <VisualBrush Stretch="Uniform" Visual="{DynamicResource appbar_arrow_down}" />
-                </Rectangle.OpacityMask>
-            </Rectangle>
-        </Button>
-        <TextBlock x:Name="textBlock_Copy" HorizontalAlignment="Left" Margin="280,6,0,0" TextWrapping="Wrap" Text="Name" VerticalAlignment="Top" Height="26" FontSize="14.667"/>
-        <TextBox x:Name="textBox_Copy1" HorizontalAlignment="Left" Height="23" Margin="324,6,0,0" TextWrapping="Wrap" Text="name" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="textBox_Copy2" HorizontalAlignment="Left" Height="23" Margin="324,99,0,0" TextWrapping="Wrap" Text="args" VerticalAlignment="Top" Width="120"/>
         <TextBlock x:Name="textBlock_Copy5" HorizontalAlignment="Left" Margin="307,100,0,0" TextWrapping="Wrap" Text="IP" VerticalAlignment="Top" Height="26" FontSize="14.667"/>
-        <TextBox x:Name="textBox_Copy3" HorizontalAlignment="Left" Height="23" Margin="324,130,0,0" TextWrapping="Wrap" Text="args" VerticalAlignment="Top" Width="120"/>
         <TextBlock x:Name="textBlock_Copy6" HorizontalAlignment="Left" Margin="293,130,0,0" TextWrapping="Wrap" Text="Port" VerticalAlignment="Top" Height="26" FontSize="14.667"/>
+        <TextBlock x:Name="textBlock_Copy7" HorizontalAlignment="Left" Margin="293,161,0,0" TextWrapping="Wrap" Text="Port" VerticalAlignment="Top" Height="26" FontSize="14.667"/>
+        <TextBlock x:Name="textBlock_Copy2" HorizontalAlignment="Left" Margin="268,192,0,0" TextWrapping="Wrap" Text="Position" VerticalAlignment="Top" Height="26" FontSize="14.667"/>
+
+        <TextBox x:Name="textBox_Copy1" HorizontalAlignment="Left" Height="23" Margin="324,6,0,0" TextWrapping="Wrap" Text="name" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Height="23" Margin="324,37,0,0" TextWrapping="Wrap" Text="path" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="textBox_Copy" HorizontalAlignment="Left" Height="23" Margin="324,68,0,0" TextWrapping="Wrap" Text="args" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="textBox_Copy2" Controls:TextBoxHelper.Watermark="127.0.0.1" HorizontalAlignment="Left" Height="23" Margin="324,99,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="textBox_Copy3" HorizontalAlignment="Left" Height="23" Margin="324,130,0,0" TextWrapping="Wrap" Text="args" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="textBox_Copy4" HorizontalAlignment="Left" Height="23" Margin="324,161,0,0" TextWrapping="Wrap" Text="args" VerticalAlignment="Top" Width="120"/>
     </Grid>
 
     <Controls:MetroWindow.Resources>
