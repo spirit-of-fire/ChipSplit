@@ -1,0 +1,24 @@
+﻿<Window x:Name="window_Splitscreen" x:Class="ChipSplit.Window_Splitscreen"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ChipSplit"
+        mc:Ignorable="d"
+		xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
+        Title="MainWindow" Width="1920" Height="1080"
+		WindowStyle="None" ShowInTaskbar="true" AllowsTransparency="False" ResizeMode="NoResize" Background="Black" HorizontalAlignment="Left" VerticalAlignment="Top" Loaded="window_Splitscreen_Loaded" Closed="window_Splitscreen_Closed">
+
+    <Window.InputBindings>
+        <KeyBinding Modifiers="Control"
+                    Key="Q"
+                    Command="{Binding HotkeyQuit}" />
+    </Window.InputBindings>
+
+    <Grid>
+        <WindowsFormsHost x:Name="windowsFormsHost1" />
+
+        <Button x:Name="button1" Content="Load" Margin="44,0,0,1050" Click="button1_Click" HorizontalAlignment="Left" Width="52"/>
+        <Button x:Name="buttonX" Content="X" Margin="0,0,1876,1050" Click="buttonX_Click"/>
+    </Grid>
+</Window>
