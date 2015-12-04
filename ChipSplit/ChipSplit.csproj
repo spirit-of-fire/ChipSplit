@@ -70,6 +70,7 @@
     </ApplicationDefinition>
     <Compile Include="Disabled\DisableMaximizeButton.cs" />
     <Compile Include="Disabled\Taskbar.cs" />
+    <Compile Include="ProcessInfo.cs" />
     <Compile Include="Window_Splitscreen.xaml.cs">
       <DependentUpon>Window_Splitscreen.xaml</DependentUpon>
     </Compile>
