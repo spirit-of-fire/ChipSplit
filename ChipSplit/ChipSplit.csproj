@@ -68,6 +68,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="backup of Window_Splitscreen.cs" />
     <Compile Include="Disabled\DisableMaximizeButton.cs" />
     <Compile Include="Disabled\Taskbar.cs" />
     <Compile Include="ProcessInfo.cs" />
@@ -82,7 +83,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="EmbedApp.cs" />
+    <Compile Include="Disabled\EmbedApp.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

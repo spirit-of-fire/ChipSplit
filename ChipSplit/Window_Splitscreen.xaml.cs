@@ -30,7 +30,8 @@ namespace ChipSplit
 		{
 			windowsFormsHost1.Visibility = Visibility.Visible; // show the windowsformshost panel again and cover the other buttons.
 			//button1.Visibility = Visibility.Hidden; // replaced with button1.isEnabled = false down below where the window_Splitscreen initializes
-			ProcessStartInfo psi = new ProcessStartInfo("C:\\Users\\cezar\\Desktop\\Halo Eldewrito\\eldorado 720p.lnk");
+
+			ProcessStartInfo psi = new ProcessStartInfo("C:\\Users\\cezar\\Desktop\\Halo\\eldorado.exe");
 			_process = Process.Start(psi);
 			_process.WaitForInputIdle();
 			SetParent(_process.MainWindowHandle, _panel.Handle);
@@ -87,16 +88,17 @@ namespace ChipSplit
 			return size;
 		}
 
+
+		// =================EVENTS==================
 		private void buttonX_Click(object sender, RoutedEventArgs e)
 		{
-			Close();
+			this.Close();
 		}
 
 		private void window_Splitscreen_Loaded(object sender, RoutedEventArgs e)
 		{
-
-
 			((MainWindow)Application.Current.MainWindow).buttonStart.IsEnabled = false; //remove the button's functionality while the new window is running
+			((MainWindow)Application.Current.MainWindow).buttonStop.Visibility = Visibility.Visible;
 			var desktopWorkingArea = System.Windows.SystemParameters.WorkArea;
 			this.Left = desktopWorkingArea.Right - this.Width;
 			this.Top = desktopWorkingArea.Bottom - this.Height;
