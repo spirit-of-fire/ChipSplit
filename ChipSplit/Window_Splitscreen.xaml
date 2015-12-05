@@ -15,7 +15,7 @@
                     Command="{Binding HotkeyQuit}" />
     </Window.InputBindings>
 
-    <Grid>
+    <Grid x:Name="gridSplitScreen">
         <WindowsFormsHost x:Name="windowsFormsHost1" />
 
         <Button x:Name="button1" Content="Load" Margin="44,0,0,1050" Click="button1_Click" HorizontalAlignment="Left" Width="52"/>
