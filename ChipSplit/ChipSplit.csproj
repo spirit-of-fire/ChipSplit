@@ -71,6 +71,7 @@
     <Compile Include="backup of Window_Splitscreen.cs" />
     <Compile Include="Disabled\DisableMaximizeButton.cs" />
     <Compile Include="Disabled\Taskbar.cs" />
+    <Compile Include="MainWindowData.cs" />
     <Compile Include="ProcessInfo.cs" />
     <Compile Include="Window_Splitscreen.xaml.cs">
       <DependentUpon>Window_Splitscreen.xaml</DependentUpon>
@@ -133,7 +134,7 @@
     <Resource Include="Resources\Entypo-license.txt" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\mahapps.metro.logo2.ico" />
+    <Resource Include="Resources\splatterLightBlue.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

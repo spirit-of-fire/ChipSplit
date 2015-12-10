@@ -7,7 +7,7 @@
         mc:Ignorable="d"
 		xmlns:wf="clr-namespace:System.Windows.Forms;assembly=System.Windows.Forms"
         Title="MainWindow" Width="1920" Height="1080"
-		WindowStyle="None" ShowInTaskbar="true" AllowsTransparency="False" ResizeMode="NoResize" Background="Black" HorizontalAlignment="Left" VerticalAlignment="Top" Loaded="window_Splitscreen_Loaded" Closed="window_Splitscreen_Closed">
+		WindowStyle="None" ShowInTaskbar="True" AllowsTransparency="False" ResizeMode="NoResize" Background="Black" HorizontalAlignment="Left" VerticalAlignment="Top" Loaded="window_Splitscreen_Loaded" Closed="window_Splitscreen_Closed">
 
     <Window.InputBindings>
         <KeyBinding Modifiers="Control"
@@ -16,9 +16,11 @@
     </Window.InputBindings>
 
     <Grid x:Name="gridSplitScreen">
-        <WindowsFormsHost x:Name="windowsFormsHost1" />
+        <WindowsFormsHost x:Name="windowsFormsHost1" Margin="0,0,960,540" />
+        <WindowsFormsHost x:Name="windowsFormsHost2" Margin="0,540,960,0" />
 
         <Button x:Name="button1" Content="Load" Margin="44,0,0,1050" Click="button1_Click" HorizontalAlignment="Left" Width="52"/>
         <Button x:Name="buttonX" Content="X" Margin="0,0,1876,1050" Click="buttonX_Click"/>
+        
     </Grid>
 </Window>

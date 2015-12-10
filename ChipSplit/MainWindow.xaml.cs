@@ -2,6 +2,7 @@
 using MahApps.Metro.Controls;
 using System.Collections.ObjectModel;
 using System;
+using System.IO;
 
 namespace ChipSplit
 {
@@ -11,18 +12,21 @@ namespace ChipSplit
 		//public IntPtr MainWindowHandle { get; set; }
 		//[DllImport("user32.dll", SetLastError = true)]
 		//private static extern long SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
-		int DisplayResolutionX = 1920;
-		int DisplayResolutionY = 1080;
+		
 
 		public ObservableCollection<ProcessInfo> CollectionProcesses = new ObservableCollection<ProcessInfo>{};
+
+		public ObservableCollection<MainWindowData.Display> CollectionDisplays = new ObservableCollection<MainWindowData.Display> { };
 
 		public MainWindow()
 		{
 			InitializeComponent();
+			CollectionDisplays.Add(new MainWindowData.Display() { DisplayResolutionX = 1920, DisplayResolutionY = 1080 });
+
 			buttonStop.Visibility = Visibility.Hidden;
 
-			textBoxWidth.DataContext = DisplayResolutionX;
-			textBoxHeight.DataContext = DisplayResolutionY;
+			textBoxWidth.DataContext = CollectionDisplays;
+			textBoxHeight.DataContext = CollectionDisplays;
 
 			comboBoxPosition.ItemsSource = typeof(Position).GetEnumNames();
 
@@ -32,13 +36,13 @@ namespace ChipSplit
 			comboBoxPosition.SelectedValue = listboxProcesses.SelectedIndex;
 			//comboBoxPosition.SelectedIndex = 0;
 
-			//textBoxWidth.Text = defaultResolutionX.ToString();
-			textBoxHeight.Text = DisplayResolutionY.ToString();
+			//textBoxWidth.Text = CollectionDisplays[0].DisplayResolutionX.ToString();
+			//textBoxHeight.Text = CollectionDisplays[0].DisplayResolutionY.ToString();
 			textBoxIP.Text = "";
 			textBoxPort.Text = "";
 
-			CollectionProcesses.Add(new ProcessInfo() { Name = "Some process", Args = "--help", Path = "C:\\secret\\place\\", Width = DisplayResolutionX / 2, Height = DisplayResolutionY / 2, WindowPosition = Position.middle });
-			CollectionProcesses.Add(new ProcessInfo() { Name = "Another process", Args = "-h", Path = "C:\\not\\here\\", Width = DisplayResolutionX / 2, Height = DisplayResolutionY / 2, WindowPosition = Position.botCenter });
+			CollectionProcesses.Add(new ProcessInfo() { Name = "Host", Args = "", Path = "C:\\secret\\place\\", Width = CollectionDisplays[0].DisplayResolutionX / 2, Height = CollectionDisplays[0].DisplayResolutionY / 2, WindowPosition = Position.middle });
+			CollectionProcesses.Add(new ProcessInfo() { Name = "Client1", Args = "-h", Path = "C:\\not\\here\\", Width = CollectionDisplays[0].DisplayResolutionX / 2, Height = CollectionDisplays[0].DisplayResolutionY / 2, WindowPosition = Position.botCenter });
 
 			listboxProcesses.ItemsSource = CollectionProcesses;
 			textBoxName.DataContext = CollectionProcesses;
@@ -79,14 +83,10 @@ namespace ChipSplit
 
 		private void button_add_process_Click(object sender, RoutedEventArgs e)
 		{
-			CollectionProcesses.Add(new ProcessInfo() { Name = "Process", Args = "", Path = "", Width = DisplayResolutionX / 2, Height = DisplayResolutionY / 2, WindowPosition = Position.topLeft });
+			//CollectionProcesses.Add(new ProcessInfo() { Name = "Process", Args = "", Path = "", Width = DisplayResolutionX / 2, Height = DisplayResolutionY / 2, WindowPosition = Position.topLeft });
+			CollectionProcesses.Add(new ProcessInfo() { Name = textBoxName.Text+"P"+(CollectionProcesses.Count+1).ToString(), Args = textBoxArgs.Text, Path = textBoxPath.Text, Width = CollectionDisplays[0].DisplayResolutionX / 2, Height = CollectionDisplays[0].DisplayResolutionY / 2, WindowPosition = Position.topLeft });
 			textStatusBar.Text = "Added new process.";
 		}
-
-		private void textBoxName_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
-		{
-			//CollectionProcesses.
-        }
 
 		private void buttonStop_Click(object sender, RoutedEventArgs e)
 		{
@@ -98,7 +98,8 @@ namespace ChipSplit
 					((MainWindow)Application.Current.MainWindow).buttonStop.Visibility = Visibility.Hidden;
 				}
 			}
-			textStatusBar.Text = "Stopped processes.";
+			this.Close();// temporary solution to address the lingering processes after splitscreen window is closed
+			//textStatusBar.Text = "Stopped processes.";
 		}
 
 		private void buttonMenuBarNew_Click(object sender, RoutedEventArgs e)
@@ -109,27 +110,77 @@ namespace ChipSplit
 		private void buttonMenuBarOpen_Click(object sender, RoutedEventArgs e)
 		{
 			// Create OpenFileDialog 
-			Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+			Microsoft.Win32.OpenFileDialog openDlg = new Microsoft.Win32.OpenFileDialog();
 
 			// Set filter for file extension and default file extension 
-			dlg.DefaultExt = ".json";
-			dlg.Filter = "JSON Files (*.json)|*.json|All Files|*.*";
+			openDlg.DefaultExt = ".json";
+			openDlg.Filter = "JSON Files (*.json)|*.json|All Files|*.*";
 
 			// Display OpenFileDialog by calling ShowDialog method 
-			Nullable<bool> result = dlg.ShowDialog();
+			Nullable<bool> result = openDlg.ShowDialog();
 
 			// Get the selected file name and display in a TextBox 
 			if (result == true)
 			{
 				// Open document 
-				string filename = dlg.FileName;
-				((MainWindow)Application.Current.MainWindow).Title = filename;
+				string openFilePath = openDlg.FileName;
+				string openFileName = Path.GetFileName(openFilePath);
+				((MainWindow)Application.Current.MainWindow).Title = openFileName;
 			}
 		}
 
 		private void buttonMenuBarSave_Click(object sender, RoutedEventArgs e)
 		{
+			// Create SaveFileDialog 
+			Microsoft.Win32.SaveFileDialog saveDlg = new Microsoft.Win32.SaveFileDialog();
 
+			// Set filter for file extension and default file extension 
+			saveDlg.DefaultExt = ".json";
+			saveDlg.Filter = "JSON Files (*.json)|*.json|All Files|*.*";
+
+			// Display SaveFileDialog by calling ShowDialog method 
+			Nullable<bool> result = saveDlg.ShowDialog();
+
+			// Get the selected file name and display in a TextBox 
+			//if (result == true)
+			//{
+				// Save document 
+				string saveFilePath = saveDlg.FileName;
+				string saveFileName = Path.GetFileName(saveFilePath);
+				((MainWindow)Application.Current.MainWindow).Title = saveFileName;
+				//string filename = dlg.FileName;
+				//((MainWindow)Application.Current.MainWindow).Title = filename;
+			//}*/
+		}
+
+		private void button_shift_down_process_Click(object sender, RoutedEventArgs e)
+		{
+			try
+			{
+				if (listboxProcesses.SelectedIndex < CollectionProcesses.Count - 1)
+				{
+					CollectionProcesses.Move(listboxProcesses.SelectedIndex, listboxProcesses.SelectedIndex + 1);
+				}
+			}
+			catch (ArgumentOutOfRangeException)
+			{
+				//throw;
+			}
+		}
+
+		private void button_shift_up_process_Click(object sender, RoutedEventArgs e)
+		{
+			try
+			{
+				if (listboxProcesses.SelectedIndex > 0)
+				{
+					CollectionProcesses.Move(listboxProcesses.SelectedIndex, listboxProcesses.SelectedIndex - 1);
+				}
+			}
+			catch (ArgumentOutOfRangeException)
+			{
+				//throw;
+			}
 		}
 	}
 }

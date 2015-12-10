@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:ChipSplit"
         mc:Ignorable="d"
 		xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
-        Title="Empty" Width="465" Height="300"
+        Title="Untitled" Width="465" Height="300"
 		ShowTitleBar="True"
-		Icon="resources/mahapps.metro.logo2.ico"
+		Icon="resources/splatterLightBlue.ico"
 		ShowMaxRestoreButton="False"
 		ShowInTaskbar="true" ResizeMode="CanMinimize"
 		ShowIconOnTitleBar="True" ShowCloseButton="True"
@@ -50,15 +50,15 @@
 
             <Rectangle Fill="#434343" Height="41" VerticalAlignment="Top"/>
         <TextBlock x:Name="textDisplay" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="DISPLAY" VerticalAlignment="Top" Height="22" FontSize="14.667" Foreground="White"/>
-        <TextBox x:Name="textBoxWidth" Text="{Binding DisplayResolutionX}" Controls:TextBoxHelper.Watermark="X"  HorizontalAlignment="Left" Height="23" Margin="69,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="48" />
-        <TextBox x:Name="textBoxHeight" Text="{Binding DisplayResolutionY}" Controls:TextBoxHelper.Watermark="Y" HorizontalAlignment="Left" Height="23" Margin="117,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="48"/>
+        <TextBox x:Name="textBoxWidth" DataContext="{Binding CollectionDisplays}" Text="{Binding DisplayResolutionX}" Controls:TextBoxHelper.Watermark="X"  HorizontalAlignment="Left" Height="23" Margin="69,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="48"/>
+        <TextBox x:Name="textBoxHeight" DataContext="{Binding CollectionDisplays}" Text="{Binding DisplayResolutionY}" Controls:TextBoxHelper.Watermark="Y" HorizontalAlignment="Left" Height="23" Margin="117,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="48" />
         <TextBlock x:Name="textIP" HorizontalAlignment="Left" Margin="180,10,0,0" TextWrapping="Wrap" Text="IP" VerticalAlignment="Top" Height="22" FontSize="14.667" Foreground="White"/>
-        <TextBox x:Name="textBoxIP" Controls:TextBoxHelper.Watermark="127.0.0.1" HorizontalAlignment="Left" Height="23" Margin="197,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="73"/>
+        <TextBox x:Name="textBoxIP" Controls:TextBoxHelper.Watermark="127.0.0.1" HorizontalAlignment="Left" Height="23" Margin="197,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="73" IsEnabled="False"/>
         <TextBlock x:Name="textPort" HorizontalAlignment="Left" Margin="292,10,0,0" TextWrapping="Wrap" Text="PORT" VerticalAlignment="Top" Height="22" FontSize="14.667" Foreground="White"/>
-        <TextBox x:Name="textBoxPort" Controls:TextBoxHelper.Watermark="11775" HorizontalAlignment="Left" Height="23" Margin="332,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50"/>
+        <TextBox x:Name="textBoxPort" Controls:TextBoxHelper.Watermark="11775" HorizontalAlignment="Left" Height="23" Margin="332,9,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
 
         <TextBlock x:Name="textProcesses" HorizontalAlignment="Left" Margin="10,46,0,0" TextWrapping="Wrap" Text="PROCESSES" VerticalAlignment="Top" Height="22" FontSize="14.667"/>
-        <Button x:Name="button_shift_up_process" Width="30" Height="30" Style="{DynamicResource MetroCircleButtonStyle}" Margin="120,38,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+        <Button x:Name="button_shift_up_process" Width="30" Height="30" Style="{DynamicResource MetroCircleButtonStyle}" Margin="120,38,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Click="button_shift_up_process_Click">
             <Rectangle Width="12" Height="12"
         		Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
                 <Rectangle.OpacityMask>
@@ -66,7 +66,7 @@
                 </Rectangle.OpacityMask>
             </Rectangle>
         </Button>
-        <Button x:Name="button_shift_down_process" Width="30" Height="30" Style="{DynamicResource MetroCircleButtonStyle}" Margin="150,38,0,0" HorizontalAlignment="Left" VerticalAlignment="Top">
+        <Button x:Name="button_shift_down_process" Width="30" Height="30" Style="{DynamicResource MetroCircleButtonStyle}" Margin="150,38,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Click="button_shift_down_process_Click">
             <Rectangle Width="12" Height="12"
         		Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
                 <Rectangle.OpacityMask>
@@ -91,6 +91,7 @@
             </Rectangle>
         </Button>
 
+		<!--->
         <Button x:Name="buttonOpenFlyout" Width="40" Height="40" Background="White" Style="{DynamicResource MetroCircleButtonStyle}" Margin="419,0,0,0" Click="buttonOpenFlyout_Click" HorizontalAlignment="Left" VerticalAlignment="Top">
             <Rectangle Width="18" Height="18"
         			Fill="{Binding Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
@@ -99,6 +100,7 @@
                 </Rectangle.OpacityMask>
             </Rectangle>
         </Button>
+		<-->
 
         <ListBox x:Name="listboxProcesses" HorizontalAlignment="Left" Margin="30,68,0,0" Width="210" IsSynchronizedWithCurrentItem="True" BorderThickness="1" Height="169" VerticalAlignment="Top">
             <ListBox.ItemTemplate>
@@ -162,14 +164,14 @@
         <-->
 
             <TextBlock x:Name="textName" HorizontalAlignment="Left" TextWrapping="Wrap" Text="NAME" VerticalAlignment="Top" Height="26" FontSize="14.667" Margin="286,54,0,0"/>
-            <TextBox x:Name="textBoxName" Controls:TextBoxHelper.Watermark="Process name" HorizontalAlignment="Left" Height="23" Margin="332,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding Name}" TextChanged="textBoxName_TextChanged"/>
+            <TextBox x:Name="textBoxName" Controls:TextBoxHelper.Watermark="Process name" HorizontalAlignment="Left" Height="23" Margin="332,54,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding Name}"/>
 
-            <TextBlock x:Name="textPath" HorizontalAlignment="Left" Margin="293,85,0,0" TextWrapping="Wrap" Text="PATH" VerticalAlignment="Top" Height="26" FontSize="14.667"/>
+            <TextBlock x:Name="textPath" HorizontalAlignment="Left" Margin="256,85,0,0" TextWrapping="Wrap" Text="SHORTCUT" VerticalAlignment="Top" Height="26" FontSize="14.667"/>
             <TextBlock x:Name="textArgs" HorizontalAlignment="Left" Margin="291,116,0,0" TextWrapping="Wrap" Text="ARGS" VerticalAlignment="Top" Height="26" FontSize="14.667"/>
 
 
 
-            <TextBox x:Name="textBoxPath" Controls:TextBoxHelper.Watermark="C:\Program Files\" HorizontalAlignment="Left" Height="23" Margin="332,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding Path}"/>
+            <TextBox x:Name="textBoxPath" Controls:TextBoxHelper.Watermark="C:\Halo\halo.lnk" HorizontalAlignment="Left" Height="23" Margin="332,85,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
             <TextBox x:Name="textBoxArgs" Controls:TextBoxHelper.Watermark="-h" HorizontalAlignment="Left" Height="23" Margin="332,116,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="{Binding Args}"/>
 
             <TextBlock x:Name="textWindowRes" HorizontalAlignment="Left" Margin="303,147,0,0" TextWrapping="Wrap" Text="RES" VerticalAlignment="Top" Height="26" FontSize="14.667"/>
